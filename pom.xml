@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.zkoss</groupId>
-	<artifactId>essentials</artifactId>
+	<artifactId>tfprojekt</artifactId>
 	<version>1.0.0</version>
 	<properties>
 		<zk.version>7.0.0</zk.version>
@@ -49,6 +49,11 @@
 			<artifactId>zkplus</artifactId>
 			<version>${zk.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.zkoss.addons</groupId>
+			<artifactId>zk-bootstrap</artifactId>
+			<version>1.0.0</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>${project.artifactId}</finalName>
@@ -59,7 +64,7 @@
 				<artifactId>maven-jetty-plugin</artifactId>
 				<version>6.1.10</version>
 				<configuration>
-					<contextPath>/essentials</contextPath>
+					<contextPath>/tfprojekt</contextPath>
 					<scanIntervalSeconds>5</scanIntervalSeconds>
 					<stopKey>foo</stopKey>
 					<stopPort>9999</stopPort>
