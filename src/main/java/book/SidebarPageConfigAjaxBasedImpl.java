@@ -13,8 +13,8 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import org.zkoss.essentials.services.SidebarPage;
-import org.zkoss.essentials.services.SidebarPageConfig;
+import book.services.SidebarPage;
+import book.services.SidebarPageConfig;
 
 public class SidebarPageConfigAjaxBasedImpl implements SidebarPageConfig{
 	

@@ -7,4 +7,5 @@
 	<button sclass="btn-info">Info</button>
 	<button sclass="btn-warning">Warning</button>
 	<button sclass="btn-danger">Danger</button>
+	
 </vbox>

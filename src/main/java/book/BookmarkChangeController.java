@@ -8,8 +8,8 @@ Copyright (C) 2012 Potix Corporation. All Rights Reserved.
 */
 package book;
 
-import org.zkoss.essentials.services.SidebarPage;
-import org.zkoss.essentials.services.SidebarPageConfig;
+import book.services.SidebarPage;
+import book.services.SidebarPageConfig;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.BookmarkEvent;
 import org.zkoss.zk.ui.event.SerializableEventListener;
