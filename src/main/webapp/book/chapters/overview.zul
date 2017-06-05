@@ -1,4 +1,11 @@
 <vbox vflex="1" hflex="1" align="center" pack="center" spacing="20px" >
-	<label value="Overview" sclass="head1"/>
-	<image src="/imgs/fig8_3.jpg" />
+	<label value="Overview" sclass="main-titel" />
+	<separator spacing="20px"/>
+	For a description of the general project, please visit the following pages:
+	<a href="https://www.bio.ifi.lmu.de/studium/ss2017/vlg_pearls/index.html" >
+	Bioinformatics Pearls: ENCODE and the Regulatory Genome
+	</a>
+	<a href="https://www.bio.ifi.lmu.de/studium/ss2017/prk_neap/" >
+	Praktikum Netzwerk- und Expressionsdaten-Analyse (NEAP)
+	</a>      
 </vbox>

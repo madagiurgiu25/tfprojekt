@@ -1,7 +1,0 @@
-<?link rel="stylesheet" type="text/css" href="/style.css"?>
-<?link rel="stylesheet" type="text/css" href="/bootstrap-3.3.7-dist/css/bootstrap.css" ?>
-<?link rel="stylesheet" type="text/css" href="/bootstrap-3.3.7-dist/css/bootstrap.min.css" ?>
-<?init class="org.zkoss.zk.ui.util.Composition" arg0="/book/layout/template.zul"?>
-<zk xmlns:w="client" xmlns:n="native">
-	<include id="mainInclude" self="@define(content)" src="/book/home.zul"/>
-</zk>
