@@ -1,0 +1,17 @@
+<grid hflex="1" vflex="1" sclass="sidebar">
+    <columns>
+        <column width="36px"/>
+        <column/>
+    </columns>
+    <rows>
+        <row>
+            <image src="/imgs/info_icon.jpg"/>
+            <a href="/index.zul">Overview</a>
+        </row>
+        <row>
+            <image src="/imgs/rna_icon.png"/>
+            <a href="/book/chapters/expression.zul">Gene Expression</a>
+        </row>
+    </rows>
+</grid>
+
