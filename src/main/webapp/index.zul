@@ -1,5 +1,5 @@
-<!-- <?link rel="stylesheet" type="text/css" href="/style.css?version=8"?> -->
-<?link rel="stylesheet" type="text/css" href="/style.css"?>
+<?link rel="stylesheet" type="text/css" href="/style.css?version=22"?>
+<!-- <?link rel="stylesheet" type="text/css" href="/style.css"?> -->
 <?link rel="stylesheet" type="text/css" href="/bootstrap-3.3.7-dist/css/bootstrap.css" ?>
 <?link rel="stylesheet" type="text/css" href="/bootstrap-3.3.7-dist/css/bootstrap.min.css" ?>
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="/book/layout/template.zul"?>

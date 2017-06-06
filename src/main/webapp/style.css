@@ -80,5 +80,10 @@
 
 .row-header{
 	color:#102d35;
-	font-weight:bold
+	font-weight:bold;
+}
+
+.small-border{
+	padding: 40px 50px;
+	width: 100%;
 }

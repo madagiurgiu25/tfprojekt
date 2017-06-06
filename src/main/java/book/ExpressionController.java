@@ -28,7 +28,7 @@ import de.alexgruen.plotly.api.event.PlotlyEventType;
 import book.model.DataModel;
 import book.services.Config;
 
-//http://localhost:8080/zktemplate/
+//http://localhost:8080/tfproject/
 
 public class ExpressionController  extends SelectorComposer<Component>{
 	private static final long serialVersionUID = 1L;

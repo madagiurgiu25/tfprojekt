@@ -1,4 +1,4 @@
-<vbox vflex="1" hflex="1" align="center" pack="center" spacing="20px" apply="book.ExpressionController">
+<vbox vflex="1" hflex="1" align="left" pack="center" class="small-border" spacing="20px" apply="book.ExpressionController">
 	<label value="Gene Expression" sclass="main-titel" />
     <separator spacing="20px"/>
     <zkplotly id="volcanoPlot" width="600px" height="600px"></zkplotly>
