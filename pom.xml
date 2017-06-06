@@ -1,17 +1,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.zkoss</groupId>
-	<artifactId>tfprojekt</artifactId>
-	<version>1.0.0</version>
+	<groupId>neap</groupId>
+	<artifactId>tfproject</artifactId>
+	<version>1.0-SNAPSHOT</version>
 	<properties>
-		<zk.version>7.0.0</zk.version>
+		<zk.version>8.0.2.2</zk.version>
+		<commons-io>2.4</commons-io>
 		<maven.build.timestamp.format>yyyy-MM-dd</maven.build.timestamp.format>
 		<packname>-${project.version}-FL-${maven.build.timestamp}</packname>
 	</properties>
 	<packaging>war</packaging>
-	<name>The ZK Essentials Example Project</name>
-	<description>The ZK Essentials Example Application</description>
+	<name>The TF Project</name>
+	<description>The TF Project</description>
 	<licenses>
 		<license>
 			<name>GNU LESSER GENERAL PUBLIC LICENSE, Version 3</name>
@@ -27,7 +28,7 @@
 		</repository>
 		<repository>
 			<id>ZK EVAL</id>
-			<name>ZK Evaluation Repository</name>
+      		<name>ZK Evaluation Repository</name>
 			<url>http://mavensync.zkoss.org/eval</url>
 		</repository>
 		<repository>
@@ -56,16 +57,27 @@
 		</dependency>
 		<dependency>
 			<groupId>org.zkoss.zk</groupId>
+			<artifactId>zul</artifactId>
+			<version>${zk.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.zkoss.zk</groupId>
 			<artifactId>zkplus</artifactId>
 			<version>${zk.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.zkoss.addons</groupId>
-			<artifactId>zk-bootstrap</artifactId>
-			<version>1.0.0</version>
+			<groupId>org.zkoss.zk</groupId>
+			<artifactId>zhtml</artifactId>
+			<version>${zk.version}</version>
 		</dependency>
 		
-		<!--Plotly dependencies -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>${commons-io}</version>
+		</dependency>
+
+		<!--Plotly dependencies-->
 		<dependency>
 			<groupId>de.alexgruen.plotly</groupId>
 			<artifactId>plotly-zk</artifactId>
@@ -97,7 +109,8 @@
 			<artifactId>commons-math3</artifactId>
 			<version>3.6.1</version>
 		</dependency>
-		
+
+
 	</dependencies>
 	<build>
 		<finalName>${project.artifactId}</finalName>
@@ -105,34 +118,18 @@
 			<!-- Run with Jetty -->
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
-				<artifactId>maven-jetty-plugin</artifactId>
-				<version>6.1.10</version>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>7.6.8.v20121106</version>
 				<configuration>
-					<contextPath>/tfprojekt</contextPath>
+					<webAppConfig>
+						<contextPath>/${project.artifactId}</contextPath>
+						<allowDuplicateFragmentNames>true</allowDuplicateFragmentNames>
+					</webAppConfig>
 					<scanIntervalSeconds>5</scanIntervalSeconds>
-					<stopKey>foo</stopKey>
-					<stopPort>9999</stopPort>
+					<stopKey>0</stopKey>
+					<stopPort>0</stopPort>
+
 				</configuration>
-				<executions>
-					<execution>
-						<id>start-jetty</id>
-						<phase>pre-integration-test</phase>
-						<goals>
-							<goal>run</goal>
-						</goals>
-						<configuration>
-							<scanIntervalSeconds>0</scanIntervalSeconds>
-							<daemon>true</daemon>
-						</configuration>
-					</execution>
-					<execution>
-						<id>stop-jetty</id>
-						<phase>post-integration-test</phase>
-						<goals>
-							<goal>stop</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 			<!-- Compile java -->
 			<plugin>
@@ -140,8 +137,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.3.2</version>
 				<configuration>
-					<source>1.5</source>
-					<target>1.5</target>
+					<source>1.7</source>
+					<target>1.7</target>
 				</configuration>
 			</plugin>
 			<!-- Build war -->
@@ -162,10 +159,10 @@
 							<goal>single</goal>
 						</goals>
 						<configuration>
-							<finalName>tfprojekt${packname}</finalName>
+							<finalName>tfproject${packname}</finalName>
 							<appendAssemblyId>false</appendAssemblyId>
 							<descriptors>
-								<descriptor>assembly/webapp.xml</descriptor>
+								<descriptor>src/main/assembly/webapp.xml</descriptor>
 							</descriptors>
 						</configuration>
 					</execution>
@@ -173,7 +170,4 @@
 			</plugin>
 		</plugins>
 	</build>
-	<scm>
-		<url>https://github.com/zkoss/zkessentials</url>
-	</scm>
 </project>

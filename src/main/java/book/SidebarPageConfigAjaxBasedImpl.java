@@ -29,10 +29,10 @@ public class SidebarPageConfigAjaxBasedImpl implements SidebarPageConfig{
 //		pageMap.put("fn3",new SidebarPage("fn3","Todo List (MVC)","/imgs/fn.png","/chapter6/todolist-mvc.zul"));
 //		pageMap.put("fn4",new SidebarPage("fn4","Todo List (MVVM)","/imgs/fn.png","/chapter6/todolist-mvvm.zul"));
 		
-		pageMap.put("overview",new SidebarPage("overview","Overview","/imgs/demo.png","/book/chapters/overview.zul"));
+		pageMap.put("overview",new SidebarPage("overview","Overview","/images/demo.png","/book/chapters/overview.zul"));
 		pageMap.put("expression",new SidebarPage("expression","Expression analysis",null,"/book/chapters/expression.zul"));
-		pageMap.put("introduction",new SidebarPage("introduction","Introduction","/imgs/demo.png","/book/chapters/introduction.zul"));
-		pageMap.put("results",new SidebarPage("results","Results","/imgs/demo.png","/book/chapters/results.zul"));
+		pageMap.put("introduction",new SidebarPage("introduction","Introduction","/images/demo.png","/book/chapters/introduction.zul"));
+		pageMap.put("results",new SidebarPage("results","Results","/images/demo.png","/book/chapters/results.zul"));
 	}
 	
 	public List<SidebarPage> getPages(){

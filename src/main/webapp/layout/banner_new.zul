@@ -1,0 +1,13 @@
+<div hflex="1" vflex="1" sclass="banner">
+    <hbox hflex="1" vflex="1" align="center">
+        <a href="https://www.bio.ifi.lmu.de/studium/ss2017/vlg_pearls/index.html">
+        <image src="/images/tf_logo.png" width="90px" />
+        </a>
+        <div width="1400px">
+            <label value="Explaining Gene Expression by Transcription Factor Binding" sclass="banner-head" />
+        </div>
+        <hbox hflex="1" vflex="1" pack="end" align="end">
+            Pia Kirchmeier, Madalina Giurgiu
+        </hbox>
+    </hbox>
+</div>
