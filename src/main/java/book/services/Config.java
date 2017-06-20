@@ -2,32 +2,36 @@ package book.services;
 
 public class Config {
 	
-	private static String file_directory = "/home/proj/biocluster/praktikum/neap_pearl/giurgiukirchmeier/Projekt/RNA_seq/data/";
+	private static String file_directory = "/home/proj/biocluster/praktikum/neap_pearl/giurgiukirchmeier/Projekt/";
 	
-	private static String mapper_file = "mappers.txt";
-	private static String states_file = "states.txt";
-	private static String fpkm_file = "FPKM.txt";
-	private static String read_count_file = "readCounts.txt";
+	private static String RNA_mapper_file = file_directory + "RNA_seq/data/mappers.txt";
+	private static String RNA_states_file = file_directory + "RNA_seq/data/states.txt";
+	private static String RNA_readcount_file = file_directory + "RNA_seq/data/readCounts/readCounts.tsv";
+	private static String RNA_fpkm_directory = file_directory + "RNA_seq/data/FPKM/";
+	private static String RNA_de_directory = file_directory + "RNA_seq/data/DE/EB_output/";
 	
-	private static String volcano_file = "volcano_file.txt"; //TODO anpassen! DE files muessen noch organisiert werden
+
 	
-	public static String getVolcano_file() { //TODO remove
-		return volcano_file;
+	public static String getRNA_mapper_file() {
+		return RNA_mapper_file;
 	}
 	
+	public static String getRNA_states_file() {
+		return RNA_states_file;
+	}
 	
-	public static String getMapper_file() {
-		return file_directory + mapper_file;
+	public static String getRNA_readcount_file() {
+		return RNA_readcount_file;
 	}
-	public static String getStates_file() {
-		return file_directory + states_file;
+	
+	public static String getRNA_fpkm_directory() {
+		return RNA_fpkm_directory;
 	}
-	public static String getFpkm_file() {
-		return file_directory + fpkm_file;
+	
+	public static String getRNA_de_directory() {
+		return RNA_de_directory;
 	}
-	public static String getRead_count_file() {
-		return file_directory + read_count_file;
-	}
+
 	
 
 }
