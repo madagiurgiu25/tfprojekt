@@ -1,0 +1,312 @@
+<vbox vflex="1" hflex="1" align="left" class="small-border" spacing="20px" apply="book.MappingStatisticsController">
+	<label value="Mapping Statistics" sclass="main-titel" />
+    <separator spacing="20px"/>
+    <hbox>
+    <vbox>
+    Sort samples by
+    <radiogroup id="sortRadiogroup">
+        <vlayout>
+            <radio id="totalCountRadio" label=" absolute number of reads in sample" selected="true"/>
+            <radio id="percentageRadio" label=" percentage of reads in sample"/>
+        </vlayout>
+     </radiogroup>
+      <separator spacing="10px"/>
+     <tree id="tree" width="255px">
+     	<treecols sizable="true">
+            <treecol label="Statistics" />
+        </treecols>
+        <treechildren>
+            <treeitem open="false">
+                <treerow>
+                    <treecell label="Feature Statistics" />
+                </treerow>
+                <treechildren>
+                    <treeitem>
+                        <treerow>
+                            <treecell>
+                            <button id="feature_all" label="Total read count"/>
+                            </treecell>
+                        </treerow>
+                    </treeitem>
+                    <treeitem>
+                        <treerow>
+                            <treecell>
+                             <button id="feature_mapped" label="Mapped reads"/>
+                            </treecell>
+                        </treerow>
+                    </treeitem>
+                    <treeitem>
+                        <treerow>
+                            <treecell>
+                             <button id="feature_multimapped" label="Multimapped reads"/>
+                            </treecell>
+                        </treerow>
+                    </treeitem>
+                    <treeitem>
+                        <treerow>
+                            <treecell>
+                             <button id="feature_transcriptomic" label="Transcriptomic reads"/>
+                            </treecell>
+                        </treerow>
+                    </treeitem>
+                    <treeitem>
+                        <treerow>
+                            <treecell>
+                             <button id="feature_merged_tr" label="Merged transcriptomic reads"/>
+                            </treecell>
+                        </treerow>
+                    </treeitem>
+                    <treeitem>
+                        <treerow>
+                            <treecell>
+                             <button id="feature_intronic" label="Intronic reads"/>
+                            </treecell>
+                        </treerow>
+                    </treeitem>
+                    <treeitem>
+                        <treerow>
+                            <treecell>
+                             <button id="feature_antisense" label="Antisense reads"/>
+                            </treecell>
+                        </treerow>
+                    </treeitem>
+                    <treeitem>
+                        <treerow>
+                            <treecell>
+                             <button id="feature_intergenic" label="Intergenic reads"/>
+                            </treecell>
+                        </treerow>
+                    </treeitem>
+                </treechildren>
+            </treeitem>
+            
+            
+           <treeitem open="false">
+                <treerow>
+                    <treecell label="Biotype Statistics" />
+                </treerow>
+                <treechildren>
+                    <treeitem>
+                        <treerow>
+                            <treecell>
+                             <button id="biotype_protein_coding" label="Protein coding reads"/>
+                            </treecell>
+                        </treerow>
+                    </treeitem>
+                    <treeitem>
+                        <treerow>
+                            <treecell>
+                             <button id="biotype_Mt_rRNA" label="Mt rRNA reads"/>
+                            </treecell>
+                        </treerow>
+                    </treeitem>
+                    <treeitem>
+                        <treerow>
+                            <treecell>
+                             <button id="biotype_rRNA" label="rRNA reads"/>
+                            </treecell>
+                        </treerow>
+                    </treeitem>
+                    <treeitem>
+                        <treerow>
+                            <treecell>
+                             <button id="biotype_pseudogene" label="Pseudogene reads"/>
+                            </treecell>
+                        </treerow>
+                    </treeitem>
+                    <treeitem>
+                        <treerow>
+                            <treecell>
+                             <button id="biotype_lincRNA" label="lincRNA reads"/>
+                            </treecell>
+                        </treerow>
+                    </treeitem>
+                    <treeitem>
+                        <treerow>
+                            <treecell>
+                             <button id="biotype_miscRNA" label="misc RNA reads"/>
+                            </treecell>
+                        </treerow>
+                    </treeitem>
+                    <treeitem>
+                        <treerow>
+                            <treecell>
+                             <button id="biotype_antisense" label="Antisense reads"/>
+                            </treecell>
+                        </treerow>
+                    </treeitem>
+                    <treeitem>
+                        <treerow>
+                            <treecell>
+                             <button id="biotype_processed_transcript" label="Processed transcript reads"/>
+                            </treecell>
+                        </treerow>
+                    </treeitem>
+                    <treeitem>
+                        <treerow>
+                            <treecell>
+                             <button id="biotype_snRNA" label="snRNA reads"/>
+                            </treecell>
+                        </treerow>
+                    </treeitem>
+                    <treeitem>
+                        <treerow>
+                            <treecell>
+                             <button id="biotype_snoRNA" label="snoRNA reads"/>
+                            </treecell>
+                        </treerow>
+                    </treeitem>
+                </treechildren>
+            </treeitem>
+            
+            
+            <treeitem open="false">
+                <treerow>
+                    <treecell label="Intergenic Statistics" />
+                </treerow>
+                <treechildren>
+                    <treeitem>
+                        <treerow>
+                            <treecell>
+                             <button id="intergenic_gene_proximal" label="gene-proximal reads"/>
+                            </treecell>
+                        </treerow>
+                    </treeitem>
+                    <treeitem>
+                        <treerow>
+                            <treecell>
+                             <button id="intergenic_antisense" label="antisense reads"/>
+                            </treecell>
+                        </treerow>
+                    </treeitem>
+                    <treeitem>
+                        <treerow>
+                            <treecell>
+                             <button id="intergenic_spliced" label="spliced reads"/>
+                            </treecell>
+                        </treerow>
+                    </treeitem>
+                </treechildren>
+            </treeitem>
+            
+            
+            <treeitem open="false">
+                <treerow>
+                    <treecell label="Quality Statistics" />
+                </treerow>
+                <treechildren>
+                    <treeitem>
+                        <treerow>
+                            <treecell>
+                             <button id="quality_multimapped" label="multimapped reads"/>
+                            </treecell>
+                        </treerow>
+                    </treeitem>
+                    <treeitem>
+                        <treerow>
+                            <treecell>
+                             <button id="quality_no_mismatch" label="reads without mismatches"/>
+                            </treecell>
+                        </treerow>
+                    </treeitem>
+                    <treeitem>
+                        <treerow>
+                            <treecell>
+                             <button id="quality_mismatch2" label="reads with at most 2 mismatches"/>
+                            </treecell>
+                        </treerow>
+                    </treeitem>
+                    <treeitem>
+                        <treerow>
+                            <treecell>
+                             <button id="quality_mismatch3" label="reads with at most 3 mismatches"/>
+                            </treecell>
+                        </treerow>
+                    </treeitem>
+                    <treeitem>
+                        <treerow>
+                            <treecell>
+                             <button id="quality_no_clipping" label="reads without clipping"/>
+                            </treecell>
+                        </treerow>
+                    </treeitem>
+                    <treeitem>
+                        <treerow>
+                            <treecell>
+                             <button id="quality_clipping5" label="reads with at most 5bp clipped"/>
+                            </treecell>
+                        </treerow>
+                    </treeitem>
+                </treechildren>
+            </treeitem>
+            
+            
+            <treeitem open="false">
+                <treerow>
+                    <treecell label="Uniqueness Statistics" />
+                </treerow>
+                <treechildren>
+                    <treeitem>
+                        <treerow>
+                            <treecell>
+                             <button id="unique_gene_unique" label="gene unique reads"/>
+                            </treecell>
+                        </treerow>
+                    </treeitem>
+                    <treeitem>
+                        <treerow>
+                            <treecell>
+                             <button id="unique_multi_gene3" label="reads mapped to max 3 genes"/>
+                            </treecell>
+                        </treerow>
+                    </treeitem>
+                    <treeitem>
+                        <treerow>
+                            <treecell>
+                             <button id="unique_intergenic_antisense" label="intergenic antisense reads"/>
+                            </treecell>
+                        </treerow>
+                    </treeitem>
+                    <treeitem>
+                        <treerow>
+                            <treecell>
+                             <button id="unique_gene_tr_unique" label="transcript unique reads"/>
+                            </treecell>
+                        </treerow>
+                    </treeitem>
+                    <treeitem>
+                        <treerow>
+                            <treecell>
+                             <button id="unique_gene_tr3" label="reads mapped to max 3 transcripts"/>
+                            </treecell>
+                        </treerow>
+                    </treeitem>
+                    <treeitem>
+                        <treerow>
+                            <treecell>
+                             <button id="unique_gene_merged" label="reads mapped to merged genes"/>
+                            </treecell>
+                        </treerow>
+                    </treeitem>
+                    <treeitem>
+                        <treerow>
+                            <treecell>
+                             <button id="unique_gene_merged_unique" label="unique merged gene reads"/>
+                            </treecell>
+                        </treerow>
+                    </treeitem>
+                     <treeitem>
+                        <treerow>
+                            <treecell>
+                             <button id="unique_intronic" label="intronic reads"/>
+                            </treecell>
+                        </treerow>
+                    </treeitem>
+                </treechildren>
+            </treeitem>
+        </treechildren>
+     </tree>
+     </vbox>
+     <zkplotly id="overallPlot" width="1450px" height="750px"></zkplotly>
+     </hbox>
+</vbox>
