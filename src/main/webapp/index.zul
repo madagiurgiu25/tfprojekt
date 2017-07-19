@@ -4,5 +4,14 @@
 <?link rel="stylesheet" type="text/css" href="/bootstrap-3.3.7-dist/css/bootstrap.min.css" ?>
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="/book/layout/template.zul"?>
 <zk xmlns:w="client" xmlns:n="native">
+<zscript>
+	import book.model.*;
+	
+	ExpressionDataModel edm = (ExpressionDataModel)Registry.registry.get(Registry.EDM);
+	if(edm == null){
+			Registry.registry.put(Registry.EDM, edm = new ExpressionDataModel());
+	}
+	System.out.println("EDM : " + edm);
+</zscript>
 	<include id="mainInclude" self="@define(content)" src="/book/home.zul"/>
 </zk>

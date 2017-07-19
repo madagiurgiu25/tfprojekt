@@ -1,0 +1,56 @@
+<vbox id="bigbox" vflex="1" hflex="1" align="left" class="small-border" spacing="20px" apply="book.FpkmStatisticsController">
+	<label value="FPKM Statistics" sclass="main-titel" />
+    <separator spacing="20px"/>
+    <hbox>
+    <vbox>
+    	Select a mapper:
+    	<combobox id="mapperCombobox" model="${bigbox$composer.mapperModel}" autodrop="true">
+        	<template name="model">
+            	<comboitem label="${each}" />
+            </template>
+        </combobox>
+    </vbox>
+    <separator spacing="40px"/>
+    <vbox>
+    	Select a state:
+    	<combobox id="stateCombobox" model="${bigbox$composer.stateModel}" autodrop="true">
+        	<template name="model">
+            	<comboitem label="${each}" />
+            </template>
+        </combobox>
+    </vbox>
+    <separator spacing="40px"/>
+    <!--vbox>
+    	Set the mode:
+    	<checkbox id="modeCheckbox" label="include points on the axes" checked="true" />
+    </vbox-->
+    </hbox>
+    <hbox>
+    <zkplotly id="correlationPlot" width="700px" height="600px"></zkplotly>
+    <separator spacing="50px"/>
+    <zkplotly id="replicatePlot" width="600px" height="600px"></zkplotly>
+    </hbox>
+    <separator spacing="50px"/>
+    <vbox>
+    <zkplotly id="cumulativePlot" width="600px" height="600px"></zkplotly>
+    </vbox>
+     <separator spacing="40px"/>
+   		<vbox>
+            <listbox id="fpkmTable" mold="paging" pageSize="20" height="600px">
+                <listhead>
+                	<listheader id="geneId" label="id" align="center" sort="auto(id)" forward="onSort=table.onSort" />
+                </listhead>
+                <template name="model">
+                    <listitem>
+                        <listcell label="${each.x}"/>
+                        <listcell label="${each.y}"/>
+                        <listcell label="${each.tag}"/>
+                    </listitem>
+                </template>
+            </listbox>
+                <hbox>
+                    <label value="select tag:"></label>
+                    <combobox id="tagFilter" readonly="true"></combobox>
+                </hbox>
+            </vbox>
+</vbox>

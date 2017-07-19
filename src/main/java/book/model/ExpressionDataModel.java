@@ -18,15 +18,16 @@ public class ExpressionDataModel{
 	private ArrayList<String> mappers;
 	private HashMap<String, String> state_conv; //RNAseq state -> combined state
 	private ArrayList<String> states;
+	private ArrayList<String> convStates;
 	private ArrayList<String> genes;
 	
-	private HashMap<String, HashMap<String, ArrayList<String>>> replicates; // mapper -> state -> replicates; //TODO fuellen
-	private HashMap<String, HashMap<String, HashMap<String, ArrayList<Double>>>> fpkm_geneTr; //for all mappers, geneIDs: state -> fpkm-List for replicates
-	private HashMap<String, HashMap<String, HashMap<String, ArrayList<Double>>>> fpkm_geneIntron;
-	private HashMap<String, HashMap<String, HashMap<String, ArrayList<Double>>>> fpkm_mainTr;
-	private HashMap<String, HashMap<String, HashMap<String, ArrayList<Double>>>> fpkm_geneTr_noPCRdupl;
-	private HashMap<String, HashMap<String, HashMap<String, ArrayList<Double>>>> fpkm_geneIntron_noPCRdupl;
-	private HashMap<String, HashMap<String, HashMap<String, ArrayList<Double>>>> fpkm_mainTr_noPCRdupl;
+//	private HashMap<String, HashMap<String, ArrayList<String>>> replicates; // mapper -> state -> replicates; //TODO fuellen
+	private HashMap<String, HashMap<String, HashMap<String, HashMap<String, Double>>>> fpkm_geneTr; //mapper -> state -> gene -> replicate -> fpkm
+	private HashMap<String, HashMap<String, HashMap<String, HashMap<String, Double>>>> fpkm_geneIntron; //TODO not filled
+	private HashMap<String, HashMap<String, HashMap<String, HashMap<String, Double>>>> fpkm_mainTr; //TODO not filled
+	private HashMap<String, HashMap<String, HashMap<String, HashMap<String, Double>>>> fpkm_geneTr_noPCRdupl; //TODO not filled
+	private HashMap<String, HashMap<String, HashMap<String, HashMap<String, Double>>>> fpkm_geneIntron_noPCRdupl; //TODO not filled
+	private HashMap<String, HashMap<String, HashMap<String, HashMap<String, Double>>>> fpkm_mainTr_noPCRdupl; //TODO not filled
 	
 	private HashMap<String, HashMap<String, HashMap<String, Double>>> log2fc;  //for all mappers: state-comb. -> log2fc
 	private HashMap<String, HashMap<String, HashMap<String, Double>>> pval;  //for all mappers: state-comb. -> adj. p-val
@@ -44,15 +45,17 @@ public class ExpressionDataModel{
 		initializeStateConv();
 		initializeGenes();
 		
-		replicates = new HashMap<String, HashMap<String, ArrayList<String>>>();
-		fpkm_geneTr = new HashMap<String, HashMap<String, HashMap<String, ArrayList<Double>>>>();
-		fpkm_geneIntron = new HashMap<String, HashMap<String, HashMap<String, ArrayList<Double>>>>();
-		fpkm_mainTr = new HashMap<String, HashMap<String, HashMap<String, ArrayList<Double>>>>();
-		fpkm_geneTr_noPCRdupl = new HashMap<String, HashMap<String, HashMap<String, ArrayList<Double>>>>();
-		fpkm_geneIntron_noPCRdupl = new HashMap<String, HashMap<String, HashMap<String, ArrayList<Double>>>>();
-		fpkm_mainTr_noPCRdupl = new HashMap<String, HashMap<String, HashMap<String, ArrayList<Double>>>>();
+//		replicates = new HashMap<String, HashMap<String, ArrayList<String>>>();
+		fpkm_geneTr = new HashMap<String, HashMap<String, HashMap<String, HashMap<String, Double>>>>();
+		fpkm_geneIntron = new HashMap<String, HashMap<String, HashMap<String, HashMap<String, Double>>>>();
+		fpkm_mainTr = new HashMap<String, HashMap<String, HashMap<String, HashMap<String, Double>>>>();
+		fpkm_geneTr_noPCRdupl = new HashMap<String, HashMap<String, HashMap<String, HashMap<String, Double>>>>();
+		fpkm_geneIntron_noPCRdupl = new HashMap<String, HashMap<String, HashMap<String, HashMap<String, Double>>>>();
+		fpkm_mainTr_noPCRdupl = new HashMap<String, HashMap<String, HashMap<String, HashMap<String, Double>>>>();
 		
-		initializeFpkm("contextmap", "gene_tr", false);
+		for(String mapper : mappers){
+			initializeFpkm(mapper, "gene_tr", false);
+		}		
 		log2fc = new HashMap<String, HashMap<String, HashMap<String, Double>>>();
 		pval = new HashMap<String, HashMap<String, HashMap<String, Double>>>();
 		
@@ -117,6 +120,7 @@ public class ExpressionDataModel{
 	private void initializeStateConv(){
 		System.out.println("DM: initializing state conversion");
 		state_conv = new HashMap<String, String>();
+		convStates = new ArrayList<String>();
 		String filename = Config.getState_conv_file();
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(new File(filename)));
@@ -125,6 +129,7 @@ public class ExpressionDataModel{
 				String combinedState = line.split("\t")[0];
 				String RNAseqState = line.split("\t")[1];
 				state_conv.put(RNAseqState, combinedState);
+				convStates.add(combinedState);
 			}
 			br.close();
 		} catch (FileNotFoundException e) {
@@ -166,29 +171,35 @@ public class ExpressionDataModel{
 	 */
 	private void initializeFpkm(String mapper, String type, boolean noPCRdupl){
 		System.out.println("DM: initializing FPKM for " + mapper);
-		HashMap<String, HashMap<String, ArrayList<Double>>> mapper_data = new HashMap<String, HashMap<String, ArrayList<Double>>>(); //for specific mapper, geneIDs: state -> fpkm-List for replicates
+		HashMap<String, HashMap<String, HashMap<String, Double>>> mapper_data = new HashMap<String, HashMap<String, HashMap<String, Double>>>(); //for specific mapper: state -> gene -> replicate -> fpkm
 		String pcrTag = noPCRdupl ? "noPCRdupl_" : "";
-		String filename = Config.getRNA_fpkm_directory() + pcrTag+ mapper + "_" + type + "_FPKM.tsv";
+		String filename = Config.getRNA_fpkm_directory() + pcrTag + mapper + "_" + type + "_FPKM.tsv";
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(new File(filename)));
 			String line = br.readLine(); //get header
-			String[] state_repls = Arrays.copyOfRange(line.split("\t"), 1, line.split("\t").length);
-			for(int i=0; i<state_repls.length; i++){
-				state_repls[i] = state_repls[i].substring(0, state_repls[i].indexOf("_"));
+			String[] state_list = new String[line.split("\t").length-1];
+			String[] repl_list = new String[line.split("\t").length-1];
+			for(int i=0; i<state_list.length; i++){
+				state_list[i] = line.split("\t")[i+1].split("_")[0];
+				state_list[i] = state_conv.get(state_list[i]);
+				repl_list[i] = line.split("\t")[i+1].split("_")[1];
+				if(!mapper_data.containsKey(state_list[i])){
+					mapper_data.put(state_list[i], new HashMap<String, HashMap<String, Double>>());
+				}
+//				System.out.println(state_list[i] + "   " + repl_list[i]);
 			}
 			while((line = br.readLine()) != null){
 				String[] content = line.split("\t");
-				String gene = content[0];
-				HashMap<String, ArrayList<Double>> gene_data = new HashMap<String, ArrayList<Double>>();
-				for(String state : states){
-					gene_data.put(state, new ArrayList<Double>());
+				String geneId = content[0];
+				for(String state : mapper_data.keySet()){
+					mapper_data.get(state).put(geneId, new HashMap<String, Double>());
 				}
-				for(int i=1; i<content.length; i++){
-					Double fpkm_value = Double.parseDouble(content[i]);
-					String state = state_repls[i-1];
-					gene_data.get(state).add(fpkm_value);
+				for(int i=0; i<repl_list.length; i++){
+					double fpkm_value = Double.parseDouble(content[i+1]);
+					fpkm_value = Math.round(fpkm_value * 10000.0)/10000.0; //round to 4 digits after comma
+					String state = state_list[i];
+					mapper_data.get(state).get(geneId).put(repl_list[i], fpkm_value);
 				}
-				mapper_data.put(gene, gene_data);
 			}			
 			br.close();
 		}catch (FileNotFoundException e) {
@@ -198,7 +209,6 @@ public class ExpressionDataModel{
 			e.printStackTrace();
 			throw new RuntimeException("Failed reading fpkm file: " + filename);
 		}
-		
 		switch(type){
 		case "gene_tr":
 			if(noPCRdupl){
@@ -222,12 +232,6 @@ public class ExpressionDataModel{
 			}
 			break;
 		}
-		
-		//test
-//		ArrayList<Double> test = fpkm.get("contextmap").get("ENSG00000156384").get("CD56+ ectoderm");
-//		for(Double d : test){
-//			System.out.println("fpkm: " + d);
-//		}
 	}
 	
 	
@@ -363,6 +367,22 @@ public class ExpressionDataModel{
 	
 	public HashMap<String, HashMap<String, HashMap<String, HashMap<String, String>>>> getUniqueStats(){
 		return uniqueStats;
+	}
+	
+	public HashMap<String, HashMap<String, HashMap<String, HashMap<String, Double>>>> getFpkm_geneTr(){
+		return fpkm_geneTr;
+	}
+	
+	public ArrayList<String> getMappers(){
+		return mappers;
+	}
+	
+	public ArrayList<String> getStates(){
+		return states;
+	}
+	
+	public ArrayList<String> getConvStates(){
+		return convStates;
 	}
 	
 

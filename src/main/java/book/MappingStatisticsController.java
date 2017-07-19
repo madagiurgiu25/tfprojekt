@@ -13,6 +13,7 @@ import org.zkoss.zul.Radiogroup;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import book.model.ExpressionDataModel;
+import book.model.Registry;
 import de.alexgruen.ZKPlotly;
 import de.alexgruen.plotly.api.common.Angle;
 import de.alexgruen.plotly.api.common.Plotly;
@@ -111,12 +112,7 @@ public class MappingStatisticsController extends SelectorComposer<Component>{
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		
-		if(datamodel == null){
-			System.out.println("MSC: initializing model");
-			datamodel = new ExpressionDataModel(); //read in all the necessary data
-		}else{
-			System.out.println("MSC: model already built");
-		}
+		datamodel = (ExpressionDataModel) Registry.registry.get(Registry.EDM);
 		
 		type = "featureStat";
 		subtype = "all";
